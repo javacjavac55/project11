@@ -95,7 +95,7 @@ public class PurchaseController {
 		return modelAndView;
 	}
 		
-	@RequestMapping(value="/listPurchase",method=RequestMethod.GET)
+	@RequestMapping(value="/listPurchase")
 	public ModelAndView listPurchase( @ModelAttribute("search") Search search , Model model , HttpSession session) throws Exception{
 		
 		System.out.println("/listPurchase.do");

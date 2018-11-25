@@ -18,6 +18,18 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
+	
+		function linkButtons(){
+			$("a.btn.btn-primary").on("click" , function() {
+				var prodNo = $(this).data('param1');
+				self.location = "/purchase/addPurchase?prod_no="+prodNo;
+			});	
+			
+			$("a.btn.btn-default").on("click" , function() {
+				var prodNo = $(this).data('param1');
+				self.location = "/product/getProduct?prodNo="+prodNo+"&menu=search";
+			});	
+		}
 		
 		function showInputField(){
 			$('#searchKeyword').val('');
@@ -70,7 +82,9 @@
 			
 			$("button.btn.btn-default").on("click" , function() {
 				checkPriceInput();
-			});		
+			});	
+			
+			linkButtons();
 
 			var currentPage = ${resultPage.currentPage};
 			function getNextItems() {
@@ -96,7 +110,9 @@
 							
 								list.forEach(function (item, index, array) {
 									var tranCode = item['proTranCode']==null ? "판매중":"재고없음";
-									$($(".col-sm-6.col-md-4").last()).after("<div class='col-sm-6 col-md-4'><div class='thumbnail'><img src='/images/uploadFiles/"+item['fileName']+"' alt='Oops! Image is not ready :P'><div class='caption'><h3>"+item['prodName']+"</h3><p>가격: "+item['price']+"</p><p>상세정보: "+item['prodDetail']+"</p><p>"+tranCode+"</p><p><a href='#' class='btn btn-primary' role='button'>Button</a><a href='#' class='btn btn-default' role='button'>Button</a></p></div></div></div>");
+									var purchaseButton = "<a href='#' class='btn btn-primary' role='button' data-param1="+item['prodNo']+">바로구매</a><a href='#' class='btn btn-default' role='button' data-param1="+item['prodNo']+">상세보기</a>";
+									$($(".col-sm-6.col-md-4").last()).after("<div class='col-sm-6 col-md-4'><div class='thumbnail'><img src='/images/uploadFiles/"+item['fileName']+"' alt='Oops! Image is not ready :P'><div class='caption'><h3>"+item['prodName']+"</h3><p>가격: "+item['price']+"</p><p>상세정보: "+item['prodDetail']+"</p><p>"+tranCode+"</p><p>"+purchaseButton+"</p></div></div></div>");
+									linkButtons();
 								});
 							}
 					});	
@@ -199,8 +215,8 @@
 						<p>상세정보: ${product.prodDetail}</p>
 						<p>${product.proTranCode == null ? '판매중':'재고 없음'}</p>
 						<p>
-							<a href="#" class="btn btn-primary" role="button">Button</a>
-							<a href="#" class="btn btn-default" role="button">Button</a>
+							<a href="#" class="btn btn-primary" role="button" data-param1="${product.prodNo}">바로구매</a>
+							<a href="#" class="btn btn-default" role="button" data-param1="${product.prodNo}">상세보기</a>
 						</p>
 					</div>
 				</div>

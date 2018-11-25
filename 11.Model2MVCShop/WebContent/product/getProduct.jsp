@@ -112,7 +112,7 @@
 				</c:if>
 				<c:if test="${param.menu == 'search'}">
 					<c:if test="${!empty user}">
-						<button type="button" class="btn btn-primary" >구&nbsp;매</button>
+						<button type="button" class="btn btn-primary" data-param1="${product.prodNo}">구&nbsp;매</button>
 					</c:if>	
 						<button type="button" class="btn btn-default" >이&nbsp;전</button>
 				</c:if>
