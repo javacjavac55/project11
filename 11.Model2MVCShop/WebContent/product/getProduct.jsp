@@ -31,7 +31,7 @@
 				}
 				
 				$("button.btn.btn-default").on("click" , function() {
-					window.history.back();
+					history.go(-1);
 				});
 			}
 		});

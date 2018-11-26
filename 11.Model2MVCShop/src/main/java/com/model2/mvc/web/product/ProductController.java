@@ -50,7 +50,7 @@ public class ProductController {
 		System.out.println("/addProduct.do");
 		
 		String fileName = System.currentTimeMillis()+"."+multipartFile.getOriginalFilename().split("\\.")[1];
-		String path = "C:\\workspace\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
+		String path = "C:\\Users\\Bit\\git\\repository11\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
 		
 		File file = new File(path+fileName);
 		multipartFile.transferTo(file);
@@ -105,7 +105,7 @@ public class ProductController {
 		
 		if (multipartFile!=null && !multipartFile.isEmpty()) {
 			String fileName = String.valueOf(System.currentTimeMillis())+"."+multipartFile.getOriginalFilename().split("\\.")[1];
-			String path = "C:\\workspace\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
+			String path = "C:\\Users\\Bit\\git\\repository11\\11.Model2MVCShop\\WebContent\\images\\uploadFiles\\";
 			
 			File file = new File(path+fileName);
 			multipartFile.transferTo(file);

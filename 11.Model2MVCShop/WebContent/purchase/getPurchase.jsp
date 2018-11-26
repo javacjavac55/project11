@@ -23,7 +23,7 @@
 			});
 			
 			$("button.btn.btn-default").on("click" , function() {
-				history.go(-1);
+				self.location = "/purchase/listPurchase/";
 			});
 		})
 	</script>

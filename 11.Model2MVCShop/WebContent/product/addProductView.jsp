@@ -66,7 +66,8 @@
 			});
 			
 			$("button.btn.btn-default").on("click" , function() {
-				resetData();
+				//resetData();
+				history.go(-2);
 			});
 		})
 	</script>
