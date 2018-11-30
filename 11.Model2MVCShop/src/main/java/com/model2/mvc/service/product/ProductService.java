@@ -17,4 +17,6 @@ public interface ProductService {
 	public int updateProduct(Product product) throws Exception;
 	
 	public List<Product> getRandomList(int randomSize) throws Exception;
+	
+	public List<String> getAutoComplete(String keyword) throws Exception;
 }

@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 	
 	<!--  ///////////////////////// CSS ////////////////////////// -->
 	<style></style>
@@ -163,6 +164,9 @@
 			  			<a class="btn btn-info btn-lg" href="#" role="button">회원가입</a>
 			  			<a class="btn btn-info btn-lg" href="#" role="button">로 그 인</a>
 			  		</div>
+			  		<div  class="text-center">
+			  			<div id="naver_id_login"></div>
+					</div>
 			  	
 			  	</div>
 	        </div>
@@ -173,7 +177,14 @@
 		
 	</div>
 	<!--  화면구성 div end /////////////////////////////////////-->
-
+	<script type="text/javascript">
+	  	var naver_id_login = new naver_id_login("wglB2_fOPgVdVEVOhiG3", "http://192.168.0.45:8080/naverLoginSupport.jsp");
+	  	var state = naver_id_login.getUniqState();
+	  	naver_id_login.setButton("white", 2,40);
+	  	naver_id_login.setDomain("http://192.168.0.45");
+	  	naver_id_login.setState(state);
+	  	naver_id_login.init_naver_id_login();
+	 </script>
 </body>
 
 </html>

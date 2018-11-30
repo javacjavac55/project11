@@ -141,16 +141,50 @@
 	
 		 
 		//==>"ID중복확인" Event 처리 및 연결
-		 $(function() {
-			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			 $("button.btn.btn-info").on("click" , function() {
-				popWin 
-				= window.open("/user/checkDuplication.jsp",
-											"popWin", 
-											"left=300,top=200,width=780,height=130,marginwidth=0,marginheight=0,"+
-											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+		 $(function() {			
+			$("#userId").on("keyup" , function() {
+				if ($('#userId').val() =='') {
+					$('#msg').html('');
+					$('#icon').remove();
+					$('#userId').parent().removeClass("has-error");
+					$('#userId').parent().removeClass("has-success");
+					$("button.btn.btn-primary").addClass("invisible");
+				} else {
+					$.ajax({
+						url : "/user/json/checkDup",
+						method : "POST",
+						data : {
+							userId:$('#userId').val()
+						},
+						dataType: "json",
+						headers : {
+							"Accept" : "application/json",
+							"Content-Type" : "application/json"
+						},
+						success : function(JSONData, status) {
+							console.log(JSONData);
+							if (JSONData) {
+								$('#icon').remove();
+								$('#msg').html("<p class='success'>사용 가능한 아이디입니다</p>");
+								$('#userId').after("<span id='icon' class='glyphicon glyphicon-ok form-control-feedback' aria-hidden='true'></span>");
+								$('#userId').parent().removeClass("has-error");
+								$('#userId').parent().addClass("has-success");
+								$("button.btn.btn-primary").removeClass("invisible");
+							} else {
+								$('#icon').remove();
+								$('#msg').html("<p class='danger'>다른 아이디를 입력해주세요</p>");
+								$('#userId').after("<span id='icon' class='glyphicon glyphicon-remove form-control-feedback' aria-hidden='true'></span>");
+								$('#userId').parent().removeClass("has-success");
+								$('#userId').parent().addClass("has-error");
+								$("button.btn.btn-primary").addClass("invisible");
+							}
+						}
+					})
+				}
 			});
 		});	
+		
+		
 
 	</script>		
     
@@ -174,7 +208,7 @@
 		<!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
-		  <div class="form-group">
+		  <!-- <div class="form-group">
 		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
 		    <div class="col-sm-4">
 		      <input type="text" class="form-control" id="userId" name="userId" placeholder="중복확인하세요"  readonly>
@@ -184,6 +218,14 @@
 		    </div>
 		    <div class="col-sm-3">
 		      <button type="button" class="btn btn-info">중복확인</button>
+		    </div>
+		  </div> -->
+		  
+		  <div class="form-group has-feedback">
+		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
+		    <div class="col-sm-4">
+		      <input type="text" class="form-control" id="userId" name="userId" placeholder="아이디" autocomplete="off">
+		      <span id="msg" class="help-block"></span>
 		    </div>
 		  </div>
 		  
@@ -254,7 +296,7 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >가 &nbsp;입</button>
+		      <button type="button" class="btn btn-primary invisible"  >가 &nbsp;입</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취&nbsp;소</a>
 		    </div>
 		  </div>

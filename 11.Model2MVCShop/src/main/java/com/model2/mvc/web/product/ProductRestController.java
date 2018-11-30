@@ -1,6 +1,8 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -126,5 +128,13 @@ public class ProductRestController {
 		System.out.println("map:"+map);
 		
 		return map;
+	}
+	
+	@RequestMapping(value="json/autoComplete", method=RequestMethod.POST)
+	public List<String> autoComplete( @RequestBody String keyword ) throws Exception{
+		keyword = URLDecoder.decode(keyword.split("=")[1], "UTF-8");
+		List<String> result = productService.getAutoComplete(keyword);
+		
+		return result;
 	}
 }

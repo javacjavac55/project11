@@ -1,6 +1,7 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -69,16 +70,18 @@ public class ProductController {
 		Product product = productService.getProduct(prodNo);
 		model.addAttribute("product", product);
 		
+		String info = prodNo+"#"+product.getFileName();
+		
 		//열어본 상품
 		if (history == null || history.length()==0) {
-			history=prodNo+"";
+			history=info+"";
 		} else {
-			if (history.indexOf(prodNo+"") != -1) {
-				history=history.replace(prodNo+",", "");
-				history=history.replace(","+prodNo, "");//마지막에 붙어있는 거 없애기
-				history=prodNo+","+history;
+			if (history.indexOf(info) != -1) {
+				history=history.replace(info+",", "");
+				history=history.replace(","+info, "");//마지막에 붙어있는 거 없애기
+				history=info+","+history;
 			} else {
-				history=prodNo+","+history;
+				history=info+","+history;
 			}
 		}
 		Cookie cookie = new Cookie("history",history);
@@ -131,8 +134,11 @@ public class ProductController {
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
+		List<Product> random=productService.getRandomList(3);
+		
 		// Model 과 View 연결
 		model.addAttribute("list", map.get("list"));
+		model.addAttribute("random", random);
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
 		

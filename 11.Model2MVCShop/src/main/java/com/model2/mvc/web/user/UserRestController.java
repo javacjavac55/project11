@@ -53,4 +53,13 @@ public class UserRestController {
 		
 		return dbUser;
 	}
+	
+	@RequestMapping( value="json/checkDup", method=RequestMethod.POST )
+	public Boolean checkDup( @RequestBody String userId) throws Exception{
+	
+		System.out.println("/user/json/checkDup : POST");
+		//Business Logic
+		
+		return userService.checkDuplication(userId.split("=")[1]);
+	}
 }

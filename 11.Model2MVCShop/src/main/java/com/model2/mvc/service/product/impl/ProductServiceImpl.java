@@ -55,5 +55,10 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getRandomList(int randomSize) throws Exception {
 		return productDao.getRandomList(randomSize);
 	}
+	
+	@Override
+	public List<String> getAutoComplete(String keyword) throws Exception{
+		return productDao.getAutoComplete(keyword);
+	}
 
 }

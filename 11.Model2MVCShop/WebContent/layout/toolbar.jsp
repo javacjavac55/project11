@@ -77,9 +77,28 @@
 	                           <li><a href="#">구매이력조회</a></li>
 	                         </c:if>
 	                         
-	                         <li><a href="#">최근본상품</a></li>
 	                         <li class="divider"></li>
 	                         <li><a href="#">etc..</a></li>
+	                     </ul>
+	                 </li>
+	                 
+	                 <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	                         <span >최근본상품</span>
+	                         <span class="caret"></span>
+	                    </a>
+	                     <ul id="viewrecord" class="dropdown-menu">
+	                        
+	                     </ul>
+	                 </li>
+	                 
+	                 <li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+	                         <span >고객센터</span>
+	                         <span class="caret"></span>
+	                    </a>
+	                     <ul class="dropdown-menu">
+	                        <li><a href="#">찾아오시는 길</a></li>
 	                     </ul>
 	                 </li>
 	                 
@@ -108,6 +127,19 @@
 			popWin = window.open("/history.jsp","popWin",
 					"left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
 		}
+	   	
+	   	$(function(){
+			var match = document.cookie.match(new RegExp('(^| )' + "history" + '=([^;]+)'));
+			if (match) {
+				var recordStr = match[2].replace(/"/g,"");
+				var recordArr = recordStr.split(",");
+				
+				for (i = 0; i < recordArr.length; i++) { 
+					 $("<li><a href='/product/getProduct?prodNo="+recordArr[i].split("#")[0]+"&menu=search'><img src='/images/uploadFiles/"+recordArr[i].split("#")[1]+"' width='100px' heigth='100px'/></a>").appendTo('#viewrecord');
+				}
+				
+			}
+	   	})
 	
 		//============= logout Event  처리 =============	
 		 $(function() {
@@ -160,8 +192,8 @@
 	 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(self.location).attr("href","/purchase/listPurchase");
 		});
-		
-	 	$( "a:contains('최근 본 상품')" ).on("click" , function() {
-	 		getHistory();
+	 	
+	 	$( "a:contains('찾아오시는 길')" ).on("click" , function() {
+	 		$(self.location).attr("href","../location.jsp");
 		});
 	</script>  

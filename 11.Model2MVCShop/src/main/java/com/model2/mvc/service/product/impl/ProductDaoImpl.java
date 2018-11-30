@@ -52,6 +52,11 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public List<Product> getRandomList(int randomSize) throws Exception {
 		return sqlSession.selectList("ProductMapper.getRandomList", randomSize);
-	}	
+	}
+	
+	@Override
+	public List<String> getAutoComplete(String keyword) throws Exception {
+		return sqlSession.selectList("ProductMapper.getAutoComplete", keyword);
+	}
 	
 }

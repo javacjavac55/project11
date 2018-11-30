@@ -17,4 +17,6 @@ public interface ProductDao {
 	public int getTotalCount(Search search) throws Exception;
 
 	public List<Product> getRandomList(int randomSize) throws Exception;
+	
+	public List<String> getAutoComplete(String keyword) throws Exception;
 }

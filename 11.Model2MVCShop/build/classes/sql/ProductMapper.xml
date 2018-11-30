@@ -179,4 +179,10 @@
 		<![CDATA[WHERE ROWNUM <= #{value}]]>
 	 </select>
 	 
+	 <select id="getAutoComplete" parameterType="java.lang.String" resultType="java.lang.String">
+	 	SELECT prod_name
+	 	FROM product
+	 	WHERE prod_name LIKE '%'||#{value}||'%'
+	 </select>
+	 
 </mapper>
